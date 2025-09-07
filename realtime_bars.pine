@@ -1,0 +1,13 @@
+//@version=6
+indicator("Recalculation on realtime bars demo")
+
+//@variable The number of bars in the Stochastic calculation. Users can change this value in the "Settings/Inputs" tab.
+int lengthInput = input.int(10, "Length", 1)
+
+//@variable The Stochastic oscillator, based on the `close`, `high`, and `low` values over `lengthInput` bars.
+float stochastic = ta.stoch(close, high, low, lengthInput)
+
+// Plot the `stochastic` value for each bar.
+plot(stochastic, "Stochastic %K", color.teal, 3)
+// Highlight the background of each realtime bar.  
+bgcolor(barstate.isrealtime ? color.new(color.purple, 80) : na, title="Realtime background highlight")
